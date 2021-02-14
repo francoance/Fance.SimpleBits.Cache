@@ -1,10 +1,10 @@
 ﻿# Fance.SimpleBits.Cache
 
 ## What is this?
-Check [my Fance.SimpleBits.General repository](https://github.com/francoance/Fance.SimpleBits.General/blob/main/README.md) ☺.
+Check my [Fance.SimpleBits.General repository](https://github.com/francoance/Fance.SimpleBits.General/blob/main/README.md) ☺.
 
 ## No, seriously, what is this?
-If you've read the linked readme and you've read the repository title's, then you might already know what this is!
+If you've read the linked readme and you've read the repository's title, then you might already know what this is!
 
 This is my cache implementation, simplified enough to download and make it work without tinkering too much.
 
@@ -24,6 +24,9 @@ On the root of your settings file add the following entry:
 #### Add the service
 Hook the service registration to your service collector, and pass your configuration object, using:
 >services.AddSimpleRedisCache(Configuration);
+
+Remember to add the using for this:
+>using Fance.SimpleBits.Cache.DependencyInjection
 
 #### Done!
 After this, you can just request a ISimpleCache object through DI and use any of the following methods:
