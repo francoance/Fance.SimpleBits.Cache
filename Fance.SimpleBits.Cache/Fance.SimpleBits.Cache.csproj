@@ -2,6 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+        <Title>Fance.SimpleBits.Cache</Title>
+        <Authors>Franco Ance</Authors>
+        <Description>Cache simple service from the SimpleBits collection. For more info, visit https://github.com/francoance/Fance.SimpleBits.Cache  </Description>
+        <Copyright>MIT License</Copyright>
+        <PackageProjectUrl>https://github.com/francoance/Fance.SimpleBits.Cache</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/francoance/Fance.SimpleBits.Cache</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
