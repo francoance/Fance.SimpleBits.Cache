@@ -1,4 +1,5 @@
 ﻿# Fance.SimpleBits.Cache
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/francoance/Fance.SimpleBits.Cache/Build%20and%20test?label=Build%20and%20test) ![Nuget](https://img.shields.io/nuget/dt/Fance.SimpleBits.Cache?label=Downloads) ![Nuget](https://img.shields.io/nuget/v/Fance.SimpleBits.Cache?label=Current%20version)
 
 ## What is this?
 Check my [Fance.SimpleBits.General repository](https://github.com/francoance/Fance.SimpleBits.General/blob/main/README.md) ☺.
@@ -17,9 +18,14 @@ Download and install the package to your projects.
 On the root of your settings file add the following entry:
 ```json
 "Cache": {
-    "Host": "your-redis-host"
+    "Host": "your-redis-host:your-redis-port",
+    "Password": "your-redist-password"
 }
 ```
+If the Host key is not found, `localhost:6379` is used by default.
+If the Password key is not found, nothing is used.
+
+If you need to use additional parameters, you could use the Host value as a connection string and append it there, like so `"Host": "localhost:6379, ssl=true, allowAdmin=true"`.
 
 #### Add the service
 Hook the service registration to your service collector, and pass your configuration object, using:
