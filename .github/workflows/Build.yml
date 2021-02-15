@@ -1,19 +1,20 @@
-name: NuGet Publish
+name: Build and test
 
 # Controls when the action will run. 
 on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    inputs:
-      package-version:
-        description: 'Package version'
-        required: true
-        default: ''
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  nuget-publish:
+  build-and-test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -35,10 +36,10 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
     
-      # Publish the package
-      - name: Publish
-        run: | # | character makes the "run" property multi-line, so we can put multiple commands in the same step
-          mkdir __out
-          dotnet pack -c Release -o __out --no-restore -p:PackageVersion=${{package-version}}
-          dotnet nuget push "./__out/*.nupkg" --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_TOKEN}}
-          rm -rf __out
+      # Build the project
+      - name: Build 
+        run: dotnet build ./Fance.SimpleBits.Cache.sln --configuration Release
+
+      # Build the project
+      - name: Test 
+        run: dotnet test ./Fance.SimpleBits.Cache.sln --configuration Release
