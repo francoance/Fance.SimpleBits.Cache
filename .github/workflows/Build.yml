@@ -42,4 +42,4 @@ jobs:
 
       # Build the project
       - name: Test 
-      run: dotnet test ./Fance.SimpleBits.Cache.sln --configuration Release
+        run: dotnet test ./Fance.SimpleBits.Cache.sln --configuration Release
