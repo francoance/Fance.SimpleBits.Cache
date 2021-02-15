@@ -24,7 +24,7 @@ namespace Fance.SimpleBits.Cache.Service
         /// Find a string by its key.
         /// </summary>
         /// <param name="key">Object's key.</param>
-        /// <returns>String found for the key.</returns>
+        /// <returns>String found or null if the key doesn't exist.</returns>
         public string Find(string key)
         {
             return _redisClient.GetString(key);
@@ -44,7 +44,7 @@ namespace Fance.SimpleBits.Cache.Service
         /// Find a string by its key, asynchronically.
         /// </summary>
         /// <param name="key">Object's key.</param>
-        /// <returns>String found for the key.</returns>
+        /// <returns>String found or null if the key doesn't exist.</returns>
         public async Task<string> FindAsync(string key)
         {
             return await _redisClient.GetStringAsync(key);
