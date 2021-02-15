@@ -1,4 +1,5 @@
-﻿using Fance.SimpleBits.Cache.Service;
+﻿using System.Text;
+using Fance.SimpleBits.Cache.Service;
 using Fance.SimpleBits.Cache.Service.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,12 +21,33 @@ namespace Fance.SimpleBits.Cache.DependencyInjection
         /// <param name="configuration">Configuration object.</param>
         public static void AddSimpleRedisCache(this IServiceCollection services, IConfiguration configuration)
         {
-            var config = configuration.GetSection("Cache");
+            var connectionString = GetConnectionStringFromConfiguration(configuration);
             services.AddStackExchangeRedisCache(setup =>
             {
-                setup.Configuration = config.GetSection("Host").Value;
+                setup.Configuration = connectionString;
             });
             services.AddSingleton<ISimpleCache, SimpleRedisCache>();
+        }
+    
+        /// <summary>
+        /// Build a redis connection string from the configuration object. 
+        /// </summary>
+        /// <param name="configuration">Configuration object.</param>
+        /// <returns>Redis connection string.</returns>
+        private static string GetConnectionStringFromConfiguration(IConfiguration configuration)
+        {
+            var connectionString = new StringBuilder();
+
+            var host = configuration.GetSection("Cache:Host").Value ?? "localhost:6379";
+            connectionString.Append(host);
+
+            var password = configuration.GetSection("Cache:Password").Value;
+            if (password != null)
+            {
+                connectionString.Append(",password=" + password);
+            }
+            
+            return connectionString.ToString();
         }
     }
 }
